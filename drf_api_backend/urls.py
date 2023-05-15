@@ -17,9 +17,19 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.urls.conf import include
+import drf_api_backend.views as root_route
 
 
 urlpatterns = [
+    path('', root_route),
+    path('admin/', admin.site.urls),
+    path('api-auth/', include('rest_framework.urls')),
+    path('dj-rest-auth/', include('dj_rest_auth.urls')),
+    path(
+        'dj-rest-auth/registration/', include('dj_rest_auth.registration.urls')
+    ),
     path('admin/', admin.site.urls),
     path('', include('profiles.urls')),
+    path('', include('posts.urls')),
+    path('', include('comments.urls')),
 ]
