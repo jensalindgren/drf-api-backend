@@ -14,8 +14,10 @@ from pathlib import Path
 import os
 import dj_database_url
 
+
 if os.path.exists('env.py'):
     import env
+
 
 CLOUDINARY_STORAGE = {
     'CLOUDINARY_URL': os.environ.get('cloudinary://796935916556985:5D6wNgEEpsG0NSSBV4Ta2tDFKtc@dh6xaeds9')
@@ -53,21 +55,26 @@ JWT_AUTH_REFRESH_COOKIE = 'my-refresh-token'
 JWT_AUTH_SAMESITE = 'None'
 
 
+API_SERIALIZER = "drf_api_backend.serializers.CurrentUserSerializer"
+
 REST_AUTH_SERIALIZERS = {
-    'USER_DETAILS_SERIALIZER': 'drf_api.serializers.CurrentUserSerializer'
+    "USER_DETAILS_SERIALIZER": API_SERIALIZER
 }
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-=&6--uzn%shc2w+!e_hcm0v2rue_udxa7@i^jkax&lu@&xytw7'
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = "DEV" in os.environ
 
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    os.environ.get("ALLOWED_HOST"),
+    "127.0.0.1", 'localhost', 'drf-api-backend.herokuapp.com'
+]
 
 
 # Application definition
@@ -150,12 +157,26 @@ WSGI_APPLICATION = 'drf_api_backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
+
+if 'DEV' in os.environ:
+    DATABASES = {
+        'default': {
+             'ENGINE': 'django.db.backends.sqlite3',
+             'NAME': BASE_DIR / 'db.sqlite3',
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
+    }
+    print("Connected to live database")
 
 
 # Password validation

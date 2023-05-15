@@ -7,7 +7,7 @@ from drf_api_backend.permissions import IsOwnerOrReadOnly
 
 class ProfileList(generics.ListCreateAPIView):
     """
-    List all profiles or create a new profile
+    List all profiles or create a new profile by logging in.
     """
     queryset = Profile.objects.all().order_by("-created_at")
     serializer_class = ProfileSerializer
@@ -15,7 +15,7 @@ class ProfileList(generics.ListCreateAPIView):
 
 class ProfileDetail(generics.RetrieveUpdateDestroyAPIView):
     """
-    Retrieve, update or delete a profile instance
+    Retrieve, update or delete a profile instance if you own it.
     """
     queryset = Profile.objects.all().order_by("-created_at")
     serializer_class = ProfileSerializer
