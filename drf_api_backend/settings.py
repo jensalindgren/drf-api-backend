@@ -52,6 +52,11 @@ JWT_AUTH_COOKIE = 'my-app-auth'
 JWT_AUTH_REFRESH_COOKIE = 'my-refresh-token'
 JWT_AUTH_SAMESITE = 'None'
 
+
+REST_AUTH_SERIALIZERS = {
+    'USER_DETAILS_SERIALIZER': 'drf_api.serializers.CurrentUserSerializer'
+}
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
@@ -90,6 +95,8 @@ INSTALLED_APPS = [
     'profiles',
     'post',
     'comments',
+    'likes',
+    'followers',
 ]
 
 SITE_ID = 1
