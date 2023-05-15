@@ -3,6 +3,7 @@ from profiles.models import Profile
 from rest_framework import generics, permissions
 from profiles.serializers import ProfileSerializer
 from drf_api_backend.permissions import IsOwnerOrReadOnly
+from django.db.models import Count
 
 
 class ProfileList(generics.ListCreateAPIView):
