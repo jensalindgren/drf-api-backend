@@ -14,8 +14,9 @@ class Profile(models.Model):
     is_staff = models.BooleanField(default=False)
     first_name = models.CharField(max_length=255, blank=True)
     last_name = models.CharField(max_length=255, blank=True)
-    image = models.ImageField(
-        upload_to='images/', default='../default_profile_qdjgyp'
+    content = models.TextField(blank=True)
+    profile_image = models.ImageField(
+        upload_to='images/', default='../default_profile_j1uwjo'
     )
 
     class Meta:
