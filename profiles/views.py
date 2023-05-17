@@ -14,7 +14,7 @@ class ProfileList(generics.ListCreateAPIView):
     queryset = Profile.objects.annotate(
         posts_count=Count('owner__posts', distinct=True),
         followers_count=Count('owner__followed', distinct=True),
-        following_count=Count('owner__following', distinct=True)
+        following_count=Count('owner__following', distinct=True),
     ).order_by('-created_at')
     serializer_class = ProfileSerializer
     filter_backends = [
@@ -40,7 +40,7 @@ class ProfileDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Profile.objects.annotate(
         posts_count=Count('owner__posts', distinct=True),
         followers_count=Count('owner__followed', distinct=True),
-        following_count=Count('owner__following', distinct=True)
+        following_count=Count('owner__following', distinct=True),
     ).order_by('-created_at')
     serializer_class = ProfileSerializer
     permission_classes = [IsOwnerOrReadOnly]
