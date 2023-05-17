@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 class Event(models.Model):
     """
-    Post event model to be created by staff
+    Event model to be created by staff
     Default image set so that we can always reference image.url.
     """
     title = models.CharField(max_length=100)

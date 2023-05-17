@@ -18,7 +18,9 @@ class FollowerList(generics.ListCreateAPIView):
 
 
 class FollowerDetail(generics.RetrieveDestroyAPIView):
-
+    """
+    Detail view for a follower. Can only be deleted by owner.
+    """
     permisson_classes = [IsOwnerOrReadOnly]
     queryset = Follower.objects.all()
     serializer_class = FollowerSerializer

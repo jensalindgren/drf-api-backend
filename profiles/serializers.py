@@ -22,6 +22,9 @@ class ProfileSerializer(serializers.ModelSerializer):
         return request.user == obj.owner
 
     def get_following_id(self, obj):
+        """
+        Get the id of the following instance if the user is authenticated
+        """
         user = self.context['request'].user
         if user.is_authenticated:
             following = Follower.objects.filter(

@@ -3,6 +3,9 @@ from events.models import Event
 
 
 class EventSerializer(serializers.ModelSerializer):
+    """
+    Serializer for the Events model
+    """
     owner = serializers.ReadOnlyField(source='owner.username')
     is_owner = serializers.SerializerMethodField()
     profile_id = serializers.ReadOnlyField(source='owner.profile.id')

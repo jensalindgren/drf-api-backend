@@ -3,12 +3,17 @@ from rest_framework import serializers
 
 
 class CurrentUserSerializer(UserDetailsSerializer):
+    """
+    Serializer for the User model
+    Adds three extra fields when returning a list of User instances
+    """
     profile_id = serializers.ReadOnlyField(source='profile.id')
     profile_image = serializers.ReadOnlyField(source='profile.image.url')
     is_staff = serializers.ReadOnlyField(source="profile.is_staff")
 
     class Meta(UserDetailsSerializer.Meta):
         fields = UserDetailsSerializer.Meta.fields + (
-            'profile_id', 'profile_image',
-            'is_staff'
+            'profile_id',
+            'profile_image',
+            'is_staff',
         )
