@@ -28,12 +28,12 @@ class Follower(models.Model):
         return f'{self.owner} {self.followed}'
 
 
-class FollowerEvent(models.Model):
+class FollowerEvents(models.Model):
     owner = models.ForeignKey(
-        Event, related_name='following', on_delete=models.CASCADE
+        Event, related_name='following_event', on_delete=models.CASCADE
     )
     followed = models.ForeignKey(
-        Event, related_name='followed', on_delete=models.CASCADE
+        Event, related_name='followed_event', on_delete=models.CASCADE
     )
     created_at = models.DateTimeField(auto_now_add=True)
 
