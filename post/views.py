@@ -34,10 +34,10 @@ class PostList(generics.ListCreateAPIView):
         'title',
     ]
     ordering_fields = [
+        'upvotes_count',
         'likes_count',
         'comments_count',
         'likes__created_at',
-        'upvotes_count',
     ]
 
     def perform_create(self, serializer):
