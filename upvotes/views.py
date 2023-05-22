@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.db.models import Count
 from rest_framework import generics, permissions
 from drf_api_backend.permissions import IsOwnerOrReadOnly
 from upvotes.models import UpVote
@@ -12,6 +13,9 @@ class UpVoteList(generics.ListCreateAPIView):
     queryset = UpVote.objects.all()
     serializer_class = UpVoteSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    ordering_fields = [
+        'upvotes_count'
+    ]
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
