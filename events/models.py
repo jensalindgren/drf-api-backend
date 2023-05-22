@@ -14,7 +14,7 @@ class Event(models.Model):
     owner = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
-        related_name="events"
+        related_name='events'
     )
     content = models.TextField(blank=True)
     image = models.ImageField(

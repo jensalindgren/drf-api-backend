@@ -24,12 +24,3 @@ class UpVoteDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = UpVote.objects.all()
     serializer_class = UpVoteSerializer
     permission_classes = [IsOwnerOrReadOnly]
-
-
-class UpvoteDelete(generics.DestroyAPIView):
-    """
-    Delete an upvote instance.
-    """
-    queryset = UpVote.objects.all()
-    serializer_class = UpVoteSerializer
-    permission_classes = [IsOwnerOrReadOnly]

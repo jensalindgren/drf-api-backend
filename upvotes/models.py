@@ -9,7 +9,7 @@ class UpVote(models.Model):
     """
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     post = models.ForeignKey(Post, on_delete=models.CASCADE,
-                             related_name="upvotes")
+                             related_name='upvotes')
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:

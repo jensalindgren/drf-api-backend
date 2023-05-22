@@ -71,14 +71,49 @@ It represents the user profile, using one to one relationship to a user model. A
 
 ### Comment
 
+| Database Value               | Field Type    | Field Argument                                                |
+| ---------------------------- | ------------- | ------------------------------------------------------------- |
+| owner                        | ForeignKey    | User, on_delete=models.CASCADE                                |
+| post                         | ForeignKey    | Post, on_delete=models.CASCADE                                |
+| created_at                   | DateTimeField | auto_now_add=True                                             |
+| updated_at                   | DateTimeField | auto_now=True                                                 |
+| content                      | TextField     | blank=True                                                    |
+
 ### Likes
+
+| Database Value               | Field Type    | Field Argument                                                |
+| ---------------------------- | ------------- | ------------------------------------------------------------- |
+| owner                        | ForeignKey    | User, on_delete=models.CASCADE                                |
+| post                         | ForeignKey    | Post, related_name='likes', on_delete=models.CASCADE          |
+| created_at                   | DateTimeField | auto_now_add=True                                             |
 
 ### Followers
 
+| Database Value               | Field Type    | Field Argument                                                |
+| ---------------------------- | ------------- | ------------------------------------------------------------- |
+| owner                        | ForeignKey    | User, related_name='following', on_delete=models.CASCADE      |
+| followed                     | ForeignKey    | User, related_name='followed', on_delete=models.CASCADE       |
+| created_at                   | DateTimeField | auto_now_add=True                                             |
+
 ### Upvotes
+
+| Database Value               | Field Type    | Field Argument                                                |
+| ---------------------------- | ------------- | ------------------------------------------------------------- |
+| title                        | ForeignKey    | User, on_delete=models.CASCADE                                |
+| post                         | ForeignKey    | Post, on_delete=models.CASCADE,related_name='upvotes'         |
+| created_at                   | DateTimeField | auto_now_add=True                                             |
 
 ### Events
 
+| Database Value               | Field Type    | Field Argument                                                |
+| ---------------------------- | ------------- | ------------------------------------------------------------- |
+| title                        | CharField     | max_length=100                                                |
+| content                      | TextField     | blank=True                                                    |
+| created_at                   | DateTimeField | auto_now_add=True                                             |
+| updated_at                   | DateTimeField | auto_now=True                                                 |
+| owner                        | ForeignKey    | User, on_delete=models.CASCADE,related_name='events'          |
+| content                      | TextField     | blank=True                                                    |
+| image                        | ImageField    | upload_to="images/", default='../default_post_sqpxy8'         |
 
 ## Testing
 
