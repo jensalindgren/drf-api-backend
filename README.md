@@ -14,6 +14,13 @@ Gymhub is a platform that allows it gym members to post comment and get informat
   - [User Stories](#user-stories)
   - [Database Structure](#database-structure)
   - [Models](#models)
+    - [Profile](#profile)
+    - [Post](#post)
+    - [Comment](#comment)
+    - [Likes](#likes)
+    - [Followers](#followers)
+    - [Upvotes](#upvotes)
+    - [Events](#events)
   - [Testing](#testing)
   - [Technologies Used](#technologies-used)
   - [Deployment to Heroku](#deployment-to-heroku)
@@ -32,6 +39,46 @@ Planning was done with user stories for the here for the backend. I started to l
 ## Database Structure
 
 ## Models
+
+Data model was planned in parallel with the user stories and API endpoints.
+Database models are defined in the models.py file. The models are:
+
+### Profile
+
+It represents the user profile, using one to one relationship to a user model. A profile can be a gym owner or a gym member. It automatically creates a profile when a user is created.
+
+| Database Value               | Field Type    | Field Argument                                                |
+| ---------------------------- | ------------- | ------------------------------------------------------------- |
+| owner                        | ForeignKey    | User, on_delete=models.CASCADE                                |
+| created_at                   | DateTimeField | auto_now_add=True                                             |
+| updated_at                   | DateTimeField | auto_now=True                                                 |
+| is_staff                     | BooleanField  | default=False                                                 |
+| first_name                   | CharField     | max_length=255, blank=True                                    |
+| last_name                    | CharField     | max_length=255, blank=True                                    |
+| content                      | TextField     | blank=True                                                    |
+| profile_image                | ImageField    | upload_to='images/', default='../default_profile_j1uwjo'      |
+
+### Post
+
+| Database Value               | Field Type    | Field Argument                                                |
+| ---------------------------- | ------------- | ------------------------------------------------------------- |
+| title                        | CharField     | max_length=255                                                |
+| content                      | TextField     | blank=True                                                    |
+| created_at                   | DateTimeField | auto_now_add=True                                             |
+| updated_at                   | DateTimeField | auto_now=True                                                 |
+| owner                        | ForeignKey    | User, on_delete=models.CASCADE,related_name="posts"           |
+| profile_image                | ImageField    | upload_to='images/', default='../default_post_sqpxy8',        |
+
+### Comment
+
+### Likes
+
+### Followers
+
+### Upvotes
+
+### Events
+
 
 ## Testing
 
