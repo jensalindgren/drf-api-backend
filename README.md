@@ -11,7 +11,6 @@ Gymhub is a platform that allows it gym members to post comment and get informat
   - [Project Goals](#project-goals)
   - [Table of Contents](#table-of-contents)
   - [Planning](#planning)
-  - [User Stories](#user-stories)
   - [Database Structure](#database-structure)
   - [Models](#models)
     - [Profile](#profile)
@@ -38,8 +37,6 @@ Gymhub is a platform that allows it gym members to post comment and get informat
 ## Planning
 
 Planning was done with user stories for the here for the backend. I started to lay up the most important models and their relationships. I also started to think about the endpoints and the serializers. I also started to think about the frontend and the components I would need.
-
-## User Stories
 
 ## Database Structure
 
