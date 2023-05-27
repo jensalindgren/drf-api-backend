@@ -242,6 +242,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+
 OLD_PASSWORD_FIELD_ENABLED = True
 
 # Internationalization
