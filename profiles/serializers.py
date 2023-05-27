@@ -9,7 +9,6 @@ class ProfileSerializer(serializers.ModelSerializer):
     """
     owner = serializers.ReadOnlyField(source='owner.username')
     is_staff = serializers.ReadOnlyField()
-    username = serializers.ReadOnlyField(source="owner.username")
     is_owner = serializers.SerializerMethodField()
 
     following_id = serializers.ReadOnlyField()
