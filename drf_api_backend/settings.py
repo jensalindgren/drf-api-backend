@@ -20,11 +20,11 @@ if os.path.exists('env.py'):
     import env
 
 
-CLOUDINARY_STORAGE = {
-    'CLOUDINARY_URL': os.environ.get('cloudinary://796935916556985:5D6wNgEEpsG0NSSBV4Ta2tDFKtc@dh6xaeds9')
-}
+CLOUDINARY_STORAGE = {"CLOUDINARY_URL": os.environ.get("CLOUDINARY_URL")}
+
 
 MEDIA_URL = '/media/'
+
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 
@@ -119,6 +119,8 @@ GRAPH_MODELS = {
         "comments",
         "likes",
         "followers",
+        "upvotes",
+        "events",
     ],
 }
 
@@ -205,18 +207,31 @@ else:
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
+USAV_VAL = (
+    "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"
+    )
+ML_VAL = (
+    "django.contrib.auth.password_validation.MinimumLengthValidator"
+    )
+CP_VAL = (
+    "django.contrib.auth.password_validation.CommonPasswordValidator"
+    )
+NP_VAL = (
+    "django.contrib.auth.password_validation.NumericPasswordValidator"
+    )
+
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        "NAME": USAV_VAL,
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        "NAME": ML_VAL,
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        "NAME": CP_VAL,
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        "NAME": NP_VAL,
     },
 ]
 
