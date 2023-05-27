@@ -1,5 +1,10 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework.permissions import IsAdminUser
+from django.contrib.auth.models import User
+
+
 from .settings import (
     JWT_AUTH_COOKIE, JWT_AUTH_REFRESH_COOKIE, JWT_AUTH_SAMESITE,
     JWT_AUTH_SECURE,
@@ -14,8 +19,11 @@ def root_route(request):
 
 
 # dj-rest-auth logout view fix
+# Fix for Django Rest Framework logout bug from Code Institute
+# DRF walkthrough
 @api_view(['POST'])
 def logout_route(request):
+    print('Doing logout')
     response = Response()
     response.set_cookie(
         key=JWT_AUTH_COOKIE,
@@ -36,3 +44,17 @@ def logout_route(request):
         secure=JWT_AUTH_SECURE,
     )
     return response
+
+
+class UsersList(APIView):
+    """
+    Returns a list of user ids and user names for testing purposes.
+    Only available to users with site admin status.
+    """
+    permission_classes = [IsAdminUser]
+
+    def get(self, request):
+        users = User.objects.values_list('username', 'id')
+        return Response({
+            "users": users
+        })
