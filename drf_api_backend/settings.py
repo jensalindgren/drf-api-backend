@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 import os
 import dj_database_url
-import re
+import sys
 
 
 if os.path.exists('env.py'):
@@ -31,27 +31,35 @@ DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-REST_PAGINATION = "rest_framework.pagination.PageNumberPagination"
 
+# Check if we are running in dev or production environment, and
+# use either session or JWT authentication as appropriate.
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [(
         'rest_framework.authentication.SessionAuthentication'
         if 'DEV' in os.environ
         else 'dj_rest_auth.jwt_auth.JWTCookieAuthentication'
     )],
-    "DEFAULT_PAGINATION_CLASS": REST_PAGINATION,
-    "PAGE_SIZE": 10,
+    'DEFAULT_PAGINATION_CLASS':
+        'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 999999999,
     "DATETIME_FORMAT": "%d %b %Y",
 }
+
+# Ensure we don't return any HTML if we are running in production
 if 'DEV' not in os.environ:
     REST_FRAMEWORK['DEFAULT_RENDERER_CLASSES'] = [
         'rest_framework.renderers.JSONRenderer',
     ]
 
 
+# Enable JWT authentication
 REST_USE_JWT = True
+# Ensure JWT authentication occurs over HTTPS
 JWT_AUTH_SECURE = True
+# Name access token
 JWT_AUTH_COOKIE = 'my-app-auth'
+# Name refresh token
 JWT_AUTH_REFRESH_COOKIE = 'my-refresh-token'
 JWT_AUTH_SAMESITE = 'None'
 
@@ -130,9 +138,9 @@ SITE_ID = 1
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
-    'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -153,15 +161,9 @@ if 'CLIENT_ORIGIN_DEV' in os.environ:
 #     CORS_ALLOWED_ORIGINS.append(os.environ.get("CLIENT_ORIGIN_DEV"))
 
 
-CORS_ALLOW_CREDENTIALS = True
+CORS_ORIGIN_ALLOW_ALL = True
 
-CORS_ALLOWED_ORIGINS = [
-    "https://example.com",
-    "https://sub.example.com",
-    "http://localhost:8080",
-    "http://127.0.0.1:9000",
-    "http://localhost:3000",
-]
+CORS_ALLOW_CREDENTIALS = True
 
 ROOT_URLCONF = 'drf_api_backend.urls'
 
@@ -213,34 +215,34 @@ else:
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
-USAV_VAL = (
-    "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"
-    )
-ML_VAL = (
-    "django.contrib.auth.password_validation.MinimumLengthValidator"
-    )
-CP_VAL = (
-    "django.contrib.auth.password_validation.CommonPasswordValidator"
-    )
-NP_VAL = (
-    "django.contrib.auth.password_validation.NumericPasswordValidator"
-    )
-
 AUTH_PASSWORD_VALIDATORS = [
     {
-        "NAME": USAV_VAL,
+        'NAME': (
+            'django.contrib.auth.password_validation'
+            '.UserAttributeSimilarityValidator'
+        ),
     },
     {
-        "NAME": ML_VAL,
+        'NAME': (
+            'django.contrib.auth.password_validation'
+            '.MinimumLengthValidator'
+        ),
     },
     {
-        "NAME": CP_VAL,
+        'NAME': (
+            'django.contrib.auth.password_validation'
+            '.CommonPasswordValidator'
+        ),
     },
     {
-        "NAME": NP_VAL,
+        'NAME': (
+            'django.contrib.auth.password_validation'
+            '.NumericPasswordValidator'
+        ),
     },
 ]
 
+OLD_PASSWORD_FIELD_ENABLED = True
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
@@ -257,9 +259,25 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
+
 STATIC_URL = 'static/'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# Allauth config - email not required
+ACCOUNT_EMAIL_REQUIRED = False
+ACCOUNT_AUTHENTICATION_METHOD = 'username'
+
+
+# Technique to conditionally switch to a local database
+if 'test' in sys.argv:
+    DATABASES['default'] = {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'mydatabase'
+    }
