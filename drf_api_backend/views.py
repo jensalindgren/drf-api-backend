@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAdminUser
 from django.contrib.auth.models import User
+from rest_framework.renderers import JSONRenderer
 
 
 from .settings import (
@@ -21,9 +22,9 @@ def root_route(request):
 # dj-rest-auth logout view fix
 # Fix for Django Rest Framework logout bug from Code Institute
 # DRF walkthrough
+# dj-rest-auth logout view fix
 @api_view(['POST'])
 def logout_route(request):
-    print('Doing logout')
     response = Response()
     response.set_cookie(
         key=JWT_AUTH_COOKIE,
