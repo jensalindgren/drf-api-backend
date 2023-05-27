@@ -147,6 +147,13 @@ if "CLIENT_ORIGIN_DEV" in os.environ:
 
 CORS_ALLOW_CREDENTIALS = True
 
+CORS_ALLOWED_ORIGINS = [
+    "https://example.com",
+    "https://sub.example.com",
+    "http://localhost:8080",
+    "http://127.0.0.1:9000",
+    "http://localhost:3000",
+]
 
 ROOT_URLCONF = 'drf_api_backend.urls'
 
