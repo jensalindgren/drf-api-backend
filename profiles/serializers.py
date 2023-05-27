@@ -10,7 +10,7 @@ class ProfileSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
     is_staff = serializers.ReadOnlyField()
     is_owner = serializers.SerializerMethodField()
-
+    username = serializers.ReadOnlyField(source="owner.username")
     following_id = serializers.ReadOnlyField()
     posts_count = serializers.ReadOnlyField()
     followers_count = serializers.ReadOnlyField()
