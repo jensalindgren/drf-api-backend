@@ -65,10 +65,9 @@ JWT_AUTH_REFRESH_COOKIE = 'my-refresh-token'
 JWT_AUTH_SAMESITE = 'None'
 
 
-API_SERIALIZER = "drf_api_backend.serializers.CurrentUserSerializer"
-
 REST_AUTH_SERIALIZERS = {
-    "USER_DETAILS_SERIALIZER": API_SERIALIZER
+    'USER_DETAILS_SERIALIZER':
+        'drf_api_backend.serializers.CurrentUserSerializer'
 }
 
 # Quick-start development settings - unsuitable for production
@@ -102,11 +101,11 @@ INSTALLED_APPS = [
     'django_filters',
     'rest_framework.authtoken',
     'dj_rest_auth',
-    'dj_rest_auth.registration',
     'django.contrib.sites',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'dj_rest_auth.registration',
     'corsheaders',
 
     'profiles',
