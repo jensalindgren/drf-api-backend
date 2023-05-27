@@ -3,7 +3,7 @@ from profiles.models import Profile
 from rest_framework import generics, filters
 from profiles.serializers import ProfileSerializer
 from drf_api_backend.permissions import IsOwnerOrReadOnly
-from django.db.models import Count
+from django.db.models import Count, Value
 from django_filters.rest_framework import DjangoFilterBackend
 
 
@@ -23,6 +23,7 @@ class ProfileList(generics.ListCreateAPIView):
     ]
     filterset_fields = [
         'owner__following__followed__profile',
+        'owner__followed__owner__profile',
     ]
     ordering_fields = [
         'posts_count',
@@ -37,6 +38,7 @@ class ProfileDetail(generics.RetrieveUpdateDestroyAPIView):
     """
     Retrieve, update or delete a profile instance if you own it.
     """
+    permission_classes = [IsOwnerOrReadOnly]
     queryset = Profile.objects.annotate(
         posts_count=Count('owner__posts', distinct=True),
         followers_count=Count('owner__followed', distinct=True),
