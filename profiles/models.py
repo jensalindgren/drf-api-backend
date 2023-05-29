@@ -15,7 +15,7 @@ class Profile(models.Model):
     name = models.CharField(max_length=255, blank=True)
     content = models.TextField(blank=True)
     profile_image = models.ImageField(
-        upload_to='images/', default='../default_profile_j1uwjo'
+        upload_to='images/", default="../default_profile_j1uwjo'
     )
 
     class Meta:
