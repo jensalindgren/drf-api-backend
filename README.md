@@ -53,6 +53,10 @@ Planning was done with user stories for the here for the backend. I started to l
 
 ## Database Structure
 
+I used the graph_models from django_extensions to generate the image. The image is available in the documentation folder.
+
+![Database Structure](/documentation/readme_images/my_project_visualized.png)
+
 ## Models
 
 Data model was planned in parallel with the user stories and API endpoints.
@@ -284,7 +288,9 @@ Django Rest Framework was used to create the API endpoints for the application.
 - [PyJWT](https://pypi.org/project/PyJWT/) - A Python library which allows you to encode and decode JSON Web Tokens (JWT).
 - [PySocks](https://pypi.org/project/PySocks/) - A Python SOCKS client module. See
 - [python3-openid](https://pypi.org/project/python3-openid/) - This is a set of Python packages to support use of the OpenID decentralized identity system in your application.
+- [pydot](https://pypi.org/project/pydot/) - Python interface to Graphviz's Dot language.
 - [pytz](https://pypi.org/project/pytz/) - World timezone definitions, modern and historical.
+- [pyparsing](https://pypi.org/project/pyparsing/) - The pyparsing module is an alternative approach to creating and executing simple grammars, vs. the traditional lex/yacc approach, or the use of regular expressions.
 - [requests](https://pypi.org/project/requests/) - Requests is an elegant and simple HTTP library for Python, built for human beings.
 - [requests-oauthlib](https://pypi.org/project/requests-oauthlib/) - This project provides first-class OAuth library support for Requests.
 - [sqlparse](https://pypi.org/project/sqlparse/) - A non-validating SQL parser module for Python.
