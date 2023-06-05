@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from rest_framework import generics, permissions
 from drf_api_backend.permissions import IsOwnerOrReadOnly
 from .models import Follower
@@ -7,7 +6,10 @@ from .serializers import FollowerSerializer
 
 class FollowerList(generics.ListCreateAPIView):
     """
-    List followers or create a follower if logged in.
+    List all followers, i.e. all instances of a user
+    following another user'.
+    Create a follower, i.e. follow a user if logged in.
+    Perform_create: associate the current logged in user with a follower.
     """
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     queryset = Follower.objects.all()
@@ -19,8 +21,10 @@ class FollowerList(generics.ListCreateAPIView):
 
 class FollowerDetail(generics.RetrieveDestroyAPIView):
     """
-    Detail view for a follower. Can only be deleted by owner.
+    Retrieve a follower
+    No Update view, as we either follow or unfollow users
+    Destroy a follower, i.e. unfollow someone if owner
     """
-    permisson_classes = [IsOwnerOrReadOnly]
+    permission_classes = [IsOwnerOrReadOnly]
     queryset = Follower.objects.all()
     serializer_class = FollowerSerializer
