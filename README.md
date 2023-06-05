@@ -22,6 +22,15 @@ Gymhub is a platform that allows it gym members to post comment and get informat
     - [Events](#events)
   - [Testing](#testing)
     - [Manual Testing](#manual-testing)
+  - [PEP8 Validation](#pep8-validation)
+    - [PEP8 Validation Results](#pep8-validation-results)
+    - [drf\_api\_backend PEP8 Validation Results](#drf_api_backend-pep8-validation-results)
+    - [Posts PEP8 Validation Results](#posts-pep8-validation-results)
+    - [Profiles PEP8 Validation Results](#profiles-pep8-validation-results)
+    - [Comments PEP8 Validation Results](#comments-pep8-validation-results)
+    - [Likes PEP8 Validation Results](#likes-pep8-validation-results)
+    - [Upvotes PEP8 Validation Results](#upvotes-pep8-validation-results)
+    - [Events PEP8 Validation Results](#events-pep8-validation-results)
   - [Technologies Used](#technologies-used)
     - [Languages](#languages)
     - [Libraries](#libraries)
@@ -125,30 +134,115 @@ It represents the user profile, using one to one relationship to a user model. A
 
 ### Manual Testing
 
-| Application | Endpoint                  | Expected Result                                                                                                                                            | Pass/Fail |
-| ----------- | ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- |
-| Profiles    | profiles/                 | Returns a list of all the profiles in the database ordered by creation date                                                                                | Pass      |
-| Profiles    | profiles/                 | Applying all the right filter for the profiles                                                                                                             | Pass      |
-| Profiles    | profiles/<int:pk>/        | Returns a single profile with a correct ID and a list of all it's values and if the user isn't the owner of the profile, they can't edit or delete it      | Pass      |
-| Profiles    | profiles/<int:pk>/        | Returns a single profile with a correct ID and a list of all it's values and if the user is the owner of the profile, they can edit and delete it          | Pass      |
-| Comments    | comments/                 | Return a list of all the comments in order of creation date                                                                                                | Pass      |
-| Comments    | comments/                 | Applying all the right filter for the comments                                                                                                             | Pass      |
-| Comments    | comments/<int:pk>/        | Returns a single comment with a correct ID and a list of all it's values                                                                                   | Pass      |
-| Comments    | comments/<int:pk>/        | Returns a single comment with a correct ID and a list of all it's values and the owner can edit and delete the comment                                     | Pass      |
-| Comments    | comments/<int:pk>/        | Returns a single comment with a correct ID and a list of all it's values and if the user isn't the owner of the comment, they can't edit or delete i       | Pass      |
-| Comments    | comments/<int:pk>/        | Returns a single comment with a correct ID and a list of all it's values and even if the user is a staff member, they can't edit and delete it             | Pass      |
-| Posts       | posts/                    | Return a list of all the posts in order of creation date                                                                                                   | Pass      |
-| Posts       | posts/                    | Applying all the right filter for the posts                                                                                                                | Pass      |
-| Posts       | posts/<int:pk>/           | Returns a single post with a correct ID and a list of all it's values and the owner can edit and delete the post                                           | Pass      |
-| Posts       | posts/<int:pk>/           | Returns a single posts with a correct ID and a list of all it's values and if the user isn't the owner of the posts, they can't edit or delete i           | Pass      |
-| Posts       | posts/<int:pk>/           | Returns a single posts with a correct ID and a list of all it's values and even if the user is a staff member, they can't edit and delete it               | Pass      |
-| Upvotes     | upvotes/                  | Returns a list of all the current upvotes in the database                                                                                                  | Pass      |
-| Upvotes     | upvotes/                  | If a user is logged out they are not able to upvote a post                                                                                                 | Pass      |
-| Upvotes     | upvotes/<int:pk>/         | Returns a single upvote with a correct ID and a list of all it's values                                                                                    | Pass      |
-| Upvotes     | upvotes/<int:pk>/         | If the user is not the owner of the upvote, they are unable to delete the upvote                                                                           | Pass      |
-| Upvotes     | upvotes/<int:pk>/         | If the user is not the owner of the upvote but is a staff member, they are unable to delete the upvote                                                     | Pass      |
+| Application | Endpoint                  | Expected Result                                                                                                                                              | Pass/Fail |
+| ----------- | ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------| --------- |
+| Profiles    | profiles/                 | Returns a list of all the profiles in the database ordered by creation date                                                                                  | Pass      |
+| Profiles    | profiles/                 | Applying all the right filter for the profiles                                                                                                               | Pass      |
+| Profiles    | profiles/<int:pk>/        | Returns a single profile with a correct ID and a list of all it's values and if the user isn't the owner of the profile, they can't edit or delete it        | Pass      |
+| Profiles    | profiles/<int:pk>/        | Returns a single profile with a correct ID and a list of all it's values and if the user is the owner of the profile, they can edit and delete it            | Pass      |
+| Comments    | comments/                 | Return a list of all the comments in order of creation date                                                                                                  | Pass      |
+| Comments    | comments/                 | Applying all the right filter for the comments                                                                                                               | Pass      |
+| Comments    | comments/<int:pk>/        | Returns a single comment with a correct ID and a list of all it's values                                                                                     | Pass      |
+| Comments    | comments/<int:pk>/        | Returns a single comment with a correct ID and a list of all it's values and the owner can edit and delete the comment                                       | Pass      |
+| Comments    | comments/<int:pk>/        | Returns a single comment with a correct ID and a list of all it's values and if the user isn't the owner of the comment, they can't edit or delete i         | Pass      |
+| Posts       | posts/                    | Return a list of all the posts in order of creation date                                                                                                     | Pass      |
+| Posts       | posts/                    | Applying all the right filter for the posts                                                                                                                  | Pass      |
+| Posts       | posts/<int:pk>/           | Returns a single post with a correct ID and a list of all it's values and the owner can edit and delete the post                                             | Pass      |
+| Posts       | posts/<int:pk>/           | Returns a single posts with a correct ID and a list of all it's values and if the user isn't the owner of the posts, they can't edit or delete i             | Pass      |
+| Posts       | posts/<int:pk>/           | Returns a single posts with a correct ID and a list of all it's values and even if the user is a staff member, they can't edit and delete it                 | Pass      |
+| Followers   | followers/                | Return a list of all the profiles and its followers                                                                                                          | Pass      |
+| Followers   | followers/<int:pk>/       | Return a single ID of profile and all its value you can choose to follow user. And unfollow                                                                  | Pass      |
+| Followers   | followers/<int:pk>/       | Return a single ID of profile and all its value you can choose to follow user. And unfollow, if the user isn't the owner of the profile, they can't unfollow | Pass      |
+| Likes       | likes/                    | Return a list of all the likes for posts                                                                                                                     | Pass      |
+| Likes       | likes/<int:pk>/           | Returns a single like with correct ID and list of all its value, owner of the like can delete the like                                                       | Pass      |
+| Likes       | likes/<int:pk>/           | Returns a single like with correct ID and list of all its value, if the user isn't the owner of the like, they can't delete it                               | Pass      |
+| Events      | events/                   | Return a list of all the posts in order of creation date                                                                                                     | Pass      |
+| Events      | events/                   | Applying all the right filter for the events                                                                                                                 | Pass      |
+| Events      | events/<int:pk>/          | Returns a single event with a correct ID and a list of all it's values and the owner can edit and delete the event                                           | Pass      |
+| Events      | events/<int:pk>/          | Returns a single event with a correct ID and a list of all it's values and if the user isn't the owner of the event, they can't edit or delete i             | Pass      |
+| Upvotes     | upvotes/                  | Returns a list of all the current upvotes in the database                                                                                                    | Pass      |
+| Upvotes     | upvotes/                  | If a user is logged out they are not able to upvote a post                                                                                                   | Pass      |
+| Upvotes     | upvotes/<int:pk>/         | Returns a single upvote with a correct ID and a list of all it's values                                                                                      | Pass      |
+| Upvotes     | upvotes/<int:pk>/         | If the user is not the owner of the upvote, they are unable to delete the upvote                                                                             | Pass      |
+| Upvotes     | upvotes/<int:pk>/         | If the user is not the owner of the upvote but is a staff member, they are unable to delete the upvote                                                       | Pass      |
 
-[Back to top](#gymhub)
+## PEP8 Validation
+
+PEP8 online was used to validate the python code in the application.
+
+### PEP8 Validation Results
+
+| File Name                    | Result |
+| ---------------------------- | ------ |
+| `__init__.py`                | Pass   |
+| `admin.py`                   | Pass   |
+| `apps.py`                    | Pass   |
+| `models.py`                  | Pass   |
+| `serializers.py`             | Pass   |
+| `tests.py`                   | Pass   |
+| `urls.py`                    | Pass   |
+| `views.py`                   | Pass   |
+| `settings.py`                | Pass   |
+| `wsgi.py`                    | Pass   |
+| `manage.py`                  | Pass   |
+
+Here is a screenshot of the apps results:
+
+### drf_api_backend PEP8 Validation Results
+
+![PEP8 Validation Results](/documentation/readme_images/drf_api_backend/pep8ci.herokuapp.com_%20(1).png)
+![PEP8 Validation Results](/documentation/readme_images/drf_api_backend/pep8ci.herokuapp.com_%20(2).png)
+![PEP8 Validation Results](/documentation/readme_images/drf_api_backend/pep8ci.herokuapp.com_%20(3).png)
+![PEP8 Validation Results](/documentation/readme_images/drf_api_backend/pep8ci.herokuapp.com_%20(4).png)
+![PEP8 Validation Results](/documentation/readme_images/drf_api_backend/pep8ci.herokuapp.com_%20(5).png)
+![PEP8 Validation Results](/documentation/readme_images/drf_api_backend/pep8ci.herokuapp.com_.png)
+
+### Posts PEP8 Validation Results
+
+![PEP8 Validation Results](/documentation/readme_images/posts/pep8ci.herokuapp.com_.png)
+![PEP8 Validation Results](/documentation/readme_images/posts/pep8ci.herokuapp.com_%20(1).png)
+![PEP8 Validation Results](/documentation/readme_images/posts/pep8ci.herokuapp.com_%20(2).png)
+![PEP8 Validation Results](/documentation/readme_images/posts/pep8ci.herokuapp.com_%20(3).png)
+
+### Profiles PEP8 Validation Results
+
+![PEP8 Validation Results](/documentation/readme_images/profiles/pep8ci.herokuapp.com_.png)
+![PEP8 Validation Results](/documentation/readme_images/profiles/pep8ci.herokuapp.com_%20(1).png)
+![PEP8 Validation Results](/documentation/readme_images/profiles/pep8ci.herokuapp.com_%20(2).png)
+![PEP8 Validation Results](/documentation/readme_images/profiles/pep8ci.herokuapp.com_%20(3).png)
+
+### Comments PEP8 Validation Results
+
+![PEP8 Validation Results](/documentation/readme_images/comments/pep8ci.herokuapp.com_.png)
+![PEP8 Validation Results](/documentation/readme_images/comments/pep8ci.herokuapp.com_%20(1).png)
+![PEP8 Validation Results](/documentation/readme_images/comments/pep8ci.herokuapp.com_%20(2).png)
+![PEP8 Validation Results](/documentation/readme_images/comments/pep8ci.herokuapp.com_%20(3).png)
+
+### Likes PEP8 Validation Results
+
+![PEP8 Validation Results](/documentation/readme_images/likes/pep8ci.herokuapp.com_.png)
+![PEP8 Validation Results](/documentation/readme_images/likes/pep8ci.herokuapp.com_%20(1).png)
+![PEP8 Validation Results](/documentation/readme_images/likes/pep8ci.herokuapp.com_%20(2).png)
+![PEP8 Validation Results](/documentation/readme_images/likes/pep8ci.herokuapp.com_%20(3).png)
+
+### Upvotes PEP8 Validation Results
+
+![PEP8 Validation Results](/documentation/readme_images/upvotes/pep8ci.herokuapp.com_.png)
+![PEP8 Validation Results](/documentation/readme_images/upvotes/pep8ci.herokuapp.com_%20(1).png)
+![PEP8 Validation Results](/documentation/readme_images/upvotes/pep8ci.herokuapp.com_%20(2).png)
+![PEP8 Validation Results](/documentation/readme_images/upvotes/pep8ci.herokuapp.com_%20(3).png)
+
+### Events PEP8 Validation Results
+
+![PEP8 Validation Results](/documentation/readme_images/events/pep8ci.herokuapp.com_.png)
+![PEP8 Validation Results](/documentation/readme_images/events/pep8ci.herokuapp.com_%20(1).png)
+![PEP8 Validation Results](/documentation/readme_images/events/pep8ci.herokuapp.com_%20(2).png)
+![PEP8 Validation Results](/documentation/readme_images/events/pep8ci.herokuapp.com_%20(3).png)
+
+I find that the PEP8 validation results are very useful as they help me to write clean code and to follow the best practices of writing code in Python.
+Did not have any issues with the PEP8 validation results.
+
+[Back to top](#table-of-contents)
 
 ## Technologies Used
 
@@ -205,7 +299,7 @@ Django Rest Framework was used to create the API endpoints for the application.
 - [ElephantSQL](https://www.elephantsql.com/) - Provides a browser tool for SQL queries where you can create, read, update and delete data directly from your web browser.
 - [CI PEP8 Linter](https://pep8ci.herokuapp.com/#) - Used to check the Python code for any linting issues
 
-[Back to top](#gymhub)
+[Back to top](#table-of-contents)
 
 ## Deployment
 
@@ -404,4 +498,4 @@ Add the following code to the bottom of the DATABASES section
 - My mentor Marcel for continuous helpful feedback.
 - My fiancee for her support and encouragement.
 
-[Back to top](#gymhub)
+[Back to top](#table-of-contents)
