@@ -4,6 +4,8 @@
 
 This project provides a Django Rest Framework API for a gym network. It has also a React frontend to interact with the API.
 
+Go to the [Gymhub Frontend](https://github.com/jensalindgren/gymhub-react) repository.
+
 Gymhub is a platform that allows it gym members to post comment and get information about the gym they are subscribed to. It also allows the gym owners to manage their gym and their members trough the platform.
 
 ## Table of Contents
