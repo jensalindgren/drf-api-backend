@@ -1,4 +1,4 @@
-# Gymhub
+# Gymhub API
 
 ## Project Goals
 
@@ -7,7 +7,7 @@ This project provides a Django Rest Framework API for a gym network. It has also
 Gymhub is a platform that allows it gym members to post comment and get information about the gym they are subscribed to. It also allows the gym owners to manage their gym and their members trough the platform.
 
 ## Table of Contents
-- [Gymhub](#gymhub)
+- [Gymhub API](#gymhub-api)
   - [Project Goals](#project-goals)
   - [Table of Contents](#table-of-contents)
   - [Planning](#planning)
@@ -30,9 +30,6 @@ Gymhub is a platform that allows it gym members to post comment and get informat
   - [Deployment to Heroku](#deployment-to-heroku)
   - [Credits](#credits)
   - [Acknowledgements](#acknowledgements)
-
-
-
 
 ## Planning
 
