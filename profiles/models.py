@@ -4,17 +4,13 @@ from django.contrib.auth.models import User
 
 
 class Profile(models.Model):
-    """
-    Model for the Profile which is a one-to-one
-    relationship with the User model
-    """
     owner = models.OneToOneField(User, on_delete=models.CASCADE)
+    is_staff = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    is_staff = models.BooleanField(default=False)
     name = models.CharField(max_length=255, blank=True)
     content = models.TextField(blank=True)
-    profile_image = models.ImageField(
+    image = models.ImageField(
         upload_to='images/", default="../default_profile_j1uwjo'
     )
 
