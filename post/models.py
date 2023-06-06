@@ -4,7 +4,6 @@ from django.contrib.auth.models import User
 
 class Post(models.Model):
     """
-    Post model to be created by staff
     Default image set so that we can always reference image.url.
     """
     image_filter_choices = [
