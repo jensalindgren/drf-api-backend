@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 
 class Post(models.Model):
     """
+    Post model, related to 'owner', i.e. a User instance.
     Default image set so that we can always reference image.url.
     """
     image_filter_choices = [
@@ -22,15 +23,11 @@ class Post(models.Model):
         ('walden', 'Walden'),
         ('xpro2', 'X-pro II')
     ]
-    title = models.CharField(max_length=100)
-    content = models.TextField(blank=True)
+    owner = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="posts")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    owner = models.ForeignKey(
-        User,
-        on_delete=models.CASCADE,
-        related_name="posts"
-    )
+    title = models.CharField(max_length=255)
     content = models.TextField(blank=True)
     image = models.ImageField(
         upload_to="images/", default='../default_post_sqpxy8', blank=True,)
