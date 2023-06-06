@@ -31,7 +31,7 @@ class Post(models.Model):
     content = models.TextField(blank=True)
     is_staff = models.BooleanField(default=False)
     image = models.ImageField(
-        upload_to="images/", default='../default_post_sqpxy8', blank=True,)
+        upload_to='images/', default='../default_post_sqpxy8', blank=True)
     image_filter = models.CharField(
         max_length=32, choices=image_filter_choices, default='normal'
     )

@@ -21,11 +21,10 @@ if os.path.exists('env.py'):
     import env
 
 
-CLOUDINARY_STORAGE = {"CLOUDINARY_URL": os.environ.get("CLOUDINARY_URL")}
-
-
+CLOUDINARY_STORAGE = {
+    'CLOUDINARY_URL': os.environ.get('CLOUDINARY_URL')
+}
 MEDIA_URL = '/media/'
-
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 
@@ -285,4 +284,3 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Allauth config - email not required
 ACCOUNT_EMAIL_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = 'username'
-
