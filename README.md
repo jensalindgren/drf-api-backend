@@ -77,7 +77,7 @@ It represents the user profile, using one to one relationship to a user model. A
 | first_name                   | CharField     | max_length=255, blank=True                                    |
 | last_name                    | CharField     | max_length=255, blank=True                                    |
 | content                      | TextField     | blank=True                                                    |
-| profile_image                | ImageField    | upload_to='images/', default='../default_profile_j1uwjo'      |
+| image                        | ImageField    | upload_to='images/', default='../default_profile_j1uwjo'      |
 
 ### Post
 
@@ -88,7 +88,8 @@ It represents the user profile, using one to one relationship to a user model. A
 | created_at                   | DateTimeField | auto_now_add=True                                             |
 | updated_at                   | DateTimeField | auto_now=True                                                 |
 | owner                        | ForeignKey    | User, on_delete=models.CASCADE,related_name="posts"           |
-| profile_image                | ImageField    | upload_to='images/', default='../default_post_sqpxy8',        |
+| image                        | ImageField    | upload_to="images/", default='../default_post_sqpxy8', blank=True,       |
+| image_filter                 | CharField     | max_length=32, choices=image_filter_choices, default='normal'      |
 
 ### Comment
 

@@ -79,12 +79,14 @@ REST_AUTH_SERIALIZERS = {
 SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = 'DEV' in os.environ
+DEBUG = 'DEBUG' in os.environ
 
 
 ALLOWED_HOSTS = [
     os.environ.get("ALLOWED_HOST"),
     'localhost', '127.0.0.1', 'http://localhost:8000/',
+    'drf-api-backend.herokuapp.com',
+    '8000-jensalindgr-drfapibacke-ltpf7p41w8f.ws-eu98.gitpod.io',
 ]
 
 
@@ -270,7 +272,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 
-STATIC_URL = '/static/'
+STATIC_URL = 'static/'
 
 
 # Default primary key field type
@@ -285,9 +287,3 @@ ACCOUNT_EMAIL_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = 'username'
 
 
-# Technique to conditionally switch to a local database
-if 'test' in sys.argv:
-    DATABASES['default'] = {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'mydatabase'
-    }
