@@ -25,3 +25,8 @@ class Follower(models.Model):
 
     def __str__(self):
         return f'{self.owner} {self.followed}'
+
+    def save(self, *args, **kwargs):
+        if self.owner == self.followed:
+            raise ValueError("A user cannot follow themselves.")
+        super().save(*args, **kwargs)
