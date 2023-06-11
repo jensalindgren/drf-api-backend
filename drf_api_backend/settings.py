@@ -84,8 +84,8 @@ DEBUG = 'DEBUG' in os.environ
 ALLOWED_HOSTS = [
     os.environ.get("ALLOWED_HOST"),
     'localhost', '127.0.0.1', 'http://localhost:8000/',
-    'drf-api-backend.herokuapp.com',
-    '8000-jensalindgr-drfapibacke-ltpf7p41w8f.ws-eu98.gitpod.io',
+    'drf-api-backend.herokuapp.com/',
+    'https://drf-api-backend.herokuapp.com/',
 ]
 
 
