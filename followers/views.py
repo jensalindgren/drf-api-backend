@@ -1,5 +1,5 @@
 from rest_framework import generics, permissions
-from drf_api_backend.permissions import IsOwnerOrReadOnly, CanFollowOrUnfollow
+from drf_api_backend.permissions import IsOwnerOrReadOnly
 from .models import Follower
 from .serializers import FollowerSerializer
 
@@ -11,9 +11,9 @@ class FollowerList(generics.ListCreateAPIView):
     Create a follower, i.e. follow a user if logged in.
     Perform_create: associate the current logged in user with a follower.
     """
-    permission_classes = [CanFollowOrUnfollow]  # Updated permission class
-    queryset = Follower.objects.all()
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     serializer_class = FollowerSerializer
+    queryset = Follower.objects.all()
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
