@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework import generics, permissions, filters
 from django_filters.rest_framework import DjangoFilterBackend
-from drf_api_backend.permissions import IsOwnerOrReadOnly
+from drf_api_backend.permissions import IsOwnerOrReadOnly, IsStaffOrReadOnly
 from .models import Event
 from .serializers import EventSerializer
 
@@ -12,7 +12,7 @@ class EventList(generics.ListCreateAPIView):
     """
     queryset = Event.objects.all()
     serializer_class = EventSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = [IsStaffOrReadOnly,]
     filter_backends = [
         filters.OrderingFilter,
         filters.SearchFilter,
@@ -33,4 +33,22 @@ class EventDetail(generics.RetrieveUpdateDestroyAPIView):
     """
     serializer_class = EventSerializer
     permission_classes = [IsOwnerOrReadOnly]
+    queryset = Event.objects.all()
+
+
+class EventDelete(generics.DestroyAPIView):
+    """
+    Delete a event if you are staff.
+    """
+    serializer_class = EventSerializer
+    permission_classes = [IsStaffOrReadOnly,]
+    queryset = Event.objects.all()
+
+
+class EventUpdate(generics.UpdateAPIView):
+    """
+    Update a event if you are staff.
+    """
+    serializer_class = EventSerializer
+    permission_classes = [IsStaffOrReadOnly,]
     queryset = Event.objects.all()
